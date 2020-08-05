@@ -14,4 +14,5 @@
 
 ### games
 JSPixelMove_Adv --logic that will be needed for games such Snake and Maze games
+
 Tic-tac-toe
