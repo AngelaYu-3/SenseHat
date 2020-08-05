@@ -10,10 +10,10 @@ sense = SenseHat()
     #pitch, roll, and yaw
     
 #can just use this line to print all three axes values 
-o = sense.get_orientation()
+gyro = sense.get_orientation()
 while(True):
-  pitch = o["pitch"]
-  roll = o["roll"]
-  yaw = o["yaw"]
+  pitch = gyro["pitch"]
+  roll = gyro["roll"]
+  yaw = gyro["yaw"]
   print "Pitch: {} Roll: {} Yaw: {}".format(pitch, roll, yaw)
   sleep(1)

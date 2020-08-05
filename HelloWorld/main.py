@@ -1,4 +1,4 @@
-from sense_hat import SenseHat #importing SenseHat class
+from sense_hat import SenseHat #importing SenseHat library
 sense = SenseHat() #creating SenseHat object sense
 
 back_color = (247, 232, 215) #background color variable (RGB values)
