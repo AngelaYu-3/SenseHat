@@ -1,5 +1,5 @@
 # SenseHat
-##recommended order
+## recommended order
 
 1. HelloWorld
 2. Name
