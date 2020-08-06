@@ -112,8 +112,10 @@ def player(i):
     p_y = int(input("Player {} enter your Y coordinate (0-2): ".format(i)))
     print("\n")
     if p_x > 2 or p_y > 2:
+      print("Please re-enter player {}".format(i))
       pass
     elif isUnique(p_x, p_y) is False:
+      print("Please re-enter player {}".format(i))
       pass
     else:
       if i == 1:
