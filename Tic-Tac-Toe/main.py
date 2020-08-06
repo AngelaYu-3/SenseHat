@@ -52,8 +52,7 @@ def isTie():
       if arr[i][j] == 0:
         return False
         break
-      elif arr[2][2] == 1 or arr[2][2] == 2:
-        return True
+  return True
       
 
 #checking for diagonal wins    
