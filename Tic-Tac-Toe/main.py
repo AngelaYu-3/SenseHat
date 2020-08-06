@@ -9,7 +9,9 @@ white = (255, 255, 255)
 blue = (0, 0, 255)
 red = (255, 0, 0)
 val = [2 , 5]
+arr = [[0] * 3 for i in range(3)]
 
+#implementing board
 def board():
   #printing out vert lines
   for i in val:
@@ -25,6 +27,7 @@ def board():
       sense.set_pixel(x, y, white)
       x +=1
 
+#inputting boxes
 def draw(x, y, color):
   x *= 3
   y *= 3
@@ -34,69 +37,101 @@ def draw(x, y, color):
   sense.set_pixel(x + 1, y, color)
   sense.set_pixel(x, y + 1, color)
   sense.set_pixel(x + 1, y + 1, color)
-    
-def player1():
-  while(True):
-    p1_x = int(input('Player 1 enter your coordinate in your X coordinate: '))
-    p1_y = int(input('Player 1 enter your coordinate in your Y coordinate:'))
-    print("")
-    if p1_x > 2 or p1_y > 2:
-      pass
-    else:
-      draw(p1_x, p1_y, blue)
-      winner("p1", p1_x, p1_y)
-      break
-    
-def player2():
-  while(True):
-    p2_x = int(input('Player 2 enter your coordinate in your X coordinate: '))
-    p2_y = int(input('Player 2 enter your coordinate in your Y coordinate: '))
-    print("\n")
-    if p2_x > 2 or p2_y > 2:
-      pass
-    else:
-      draw(p2_x, p2_y, red)
-      #winner()
-      break
 
-#stopping the game when one player gets three in a row
-#using a 2d array to track where players are and to check if there's a win
-#still in the process of programming
-#if this is too difficult for students, can give them code with winner() already implemented
-#or just not have them code winner at all as game can still be played w/o winner()
-def winner(player, x, y):
-  rows, cols = (3, 3) 
-  global arr 
-  arr = [[0 for x in range(3)] for y in range(3)] 
-  #arrPrint(arr)
-  arr[0][0] = 1
-  #arrPrint(arr)
-  #print("")
-  arr[0][1] = 1
-  #arrPrint(arr)
-  #print("")
-  arr[0][2] = 1
-  #arrPrint(arr)
-  
-  if arr[0] == [1, 1, 1]:
-    print(":)")
- 
-#used for debugging winner()     
-def arrPrint(array):
+#making sure not coordinates are repeated   
+def isUnique(x, y):
+  if arr[x][y] == 0:
+    return True
+  else:
+    return False
+
+#checking for a tie    
+def isTie():
   for i in range(3):
     for j in range(3):
-      print(array[i][j])
+      if arr[i][j] == 0:
+        return False
+        break
+      elif arr[2][2] == 1 or arr[2][2] == 2:
+        return True
+      
+
+#checking for diagonal wins    
+def isHwin(y_val, t):
+    if (arr[0][y_val] == t) and (arr[1][y_val] == t) and (arr[2][y_val] == t):
+      return True
+    else:
+      return False
+
+#checking for horizontal wins      
+def isXwin(t):
+    if (arr[0][0] == t) and (arr[1][1] == t) and (arr[2][2] == t):
+      return True
+    elif (arr[0][2] == t) and (arr[1][1] == t) and (arr[2][0] == t):
+      return True
+    else:
+      return False
+
+#2d array to track where players are and to check if there's a win
+def winner(player, x, y):
+  if player is "p1":
+    arr[x][y] = 1
+    #print(arr)
+    if (arr[0] == [1, 1, 1]) or (arr[1] == [1, 1, 1]) or (arr[2] == [1, 1, 1]):
+      print("Player 1 (BLUE) wins!")
+      exit()
+    elif isHwin(y, 1) is True:
+      print("Player 1 (BLUE) wins!")
+      exit()
+    elif isXwin(1) is True:
+       print("Player 1 (BLUE) wins!")
+       exit()
+    elif isTie() is True:
+      print("Tie!")
+      exit()
+      
+  else:
+    arr[x][y] = 2
+    #print(arr)
+    if (arr[0] == [2, 2, 2]) or (arr[1] == [2, 2, 2]) or (arr[2] == [2, 2, 2]):
+      print("Player 2 (RED) wins!")
+      exit()
+    elif isHwin(y, 2) is True:
+      print("Player 2 (RED) wins!")
+      exit()
+    elif isXwin(2) is True:
+       print("Player 2 (RED) wins!")
+       exit()
+    elif isTie() is True:
+      print("Tie!")
+      exit()
+       
+#player method, recieving input, drawing, and deciding if winner    
+def player(i):
+  while(True):
+    p_x = int(input("Player {} enter your X coordinate (0-2): ".format(i)))
+    p_y = int(input("Player {} enter your Y coordinate (0-2): ".format(i)))
+    print("\n")
+    if p_x > 2 or p_y > 2:
+      pass
+    elif isUnique(p_x, p_y) is False:
+      pass
+    else:
+      if i == 1:
+        draw(p_x, p_y, blue)
+        winner("p1", p_x, p_y)
+        break
+      else:
+        draw(p_x, p_y, red)
+        winner("p2", p_x, p_y)
+        break
     
-#user interface      
+#main method     
 def main():
   board()
-  print("Player 1 is blue, Player 2 is red. Player 1 will start")
+  print("Player 1 is BLUE, Player 2 is RED. Player 1 will start")
   while True:
-    player1()
-    player2()
+    player(1)
+    player(2)
   
 main()
-  
-
-
-  
