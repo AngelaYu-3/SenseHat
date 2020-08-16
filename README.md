@@ -1,4 +1,4 @@
-# SenseHat
+# SenseHat--possible curriculum for MetaCoders
 ## recommended order
 
 1. HelloWorld
