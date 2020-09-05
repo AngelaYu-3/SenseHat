@@ -56,54 +56,43 @@ def isTie():
       
 
 #checking for diagonal wins    
-def isHwin(y_val, t):
-    if (arr[0][y_val] == t) and (arr[1][y_val] == t) and (arr[2][y_val] == t):
+def isHwin(y_val, p):
+    if (arr[0][y_val] == p) and (arr[1][y_val] == p) and (arr[2][y_val] == p):
       return True
     else:
       return False
 
 #checking for horizontal wins      
-def isXwin(t):
-    if (arr[0][0] == t) and (arr[1][1] == t) and (arr[2][2] == t):
+def isXwin(p):
+    if (arr[0][0] == p) and (arr[1][1] == p) and (arr[2][2] == p):
       return True
-    elif (arr[0][2] == t) and (arr[1][1] == t) and (arr[2][0] == t):
+    elif (arr[0][2] == p) and (arr[1][1] == p) and (arr[2][0] == p):
       return True
     else:
       return False
 
 #2d array to track where players are and to check if there's a win
-def winner(player, x, y):
-  if player is "p1":
-    arr[x][y] = 1
+def winner(p, x, y):
+    arr[x][y] = p
     #print(arr)
-    if (arr[0] == [1, 1, 1]) or (arr[1] == [1, 1, 1]) or (arr[2] == [1, 1, 1]):
+    if (arr[0] == [p, p, p]) or (arr[1] == [p, p, p]) or (arr[2] == [p, p, p]):
       print("Player 1 (BLUE) wins!")
       exit()
-    elif isHwin(y, 1) is True:
-      print("Player 1 (BLUE) wins!")
+    elif isHwin(y, p) is True:
+      if p == 1:
+          print("Player 1 (BLUE) wins!")
+      else:
+          print("Player 2 (RED) wins!")
       exit()
-    elif isXwin(1) is True:
-       print("Player 1 (BLUE) wins!")
-       exit()
+    elif isXwin(p) is True:
+      if p == 1:
+          print("Player 1 (BLUE) wins!")
+      else:
+          print("Player 2 (RED) wins!")
+      exit()
     elif isTie() is True:
-      print("Tie!")
-      exit()
-      
-  else:
-    arr[x][y] = 2
-    #print(arr)
-    if (arr[0] == [2, 2, 2]) or (arr[1] == [2, 2, 2]) or (arr[2] == [2, 2, 2]):
-      print("Player 2 (RED) wins!")
-      exit()
-    elif isHwin(y, 2) is True:
-      print("Player 2 (RED) wins!")
-      exit()
-    elif isXwin(2) is True:
-       print("Player 2 (RED) wins!")
+       print("Tie!")
        exit()
-    elif isTie() is True:
-      print("Tie!")
-      exit()
        
 #player method, recieving input, drawing, and deciding if winner    
 def player(i):
@@ -120,11 +109,11 @@ def player(i):
     else:
       if i == 1:
         draw(p_x, p_y, blue)
-        winner("p1", p_x, p_y)
+        winner(1, p_x, p_y)
         break
       else:
         draw(p_x, p_y, red)
-        winner("p2", p_x, p_y)
+        winner(2, p_x, p_y)
         break
     
 #main method     
