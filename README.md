@@ -1,5 +1,6 @@
-# SenseHat
+# SenseHat--possible curriculum for MetaCoders
 ## recommended order
+### run code in emulator: https://trinket.io/sense-hat
 
 1. HelloWorld
 2. Name
